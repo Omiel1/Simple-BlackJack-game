@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<head>
+    <title>Blackjack game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    
+    <div id="title-container">
+        <h1 style="flex: 1 1 90px;">Blackjack</h1>
+    </div>
+    
+    <p id="message-p"></p>
+    <p id="cards-container">Your cards: 
+        <span id="first-card"></span>
+        <span id="second-card"></span>
+        <span id="third-card"></span>
+        <span id="fourth-card"></span>
+        <span id="fifth-card"></span>
+    </p>
+    <p id="sumOfMyCards">Sum: <span id='sum-container'></span></p>
+    <div>
+        <button id = 'start-button' style="flex:1 1 90px" onclick="startGame()">Start Game</button>
+    </div>
+    <div id="buttons">
+        <button class = 'button' id="draw-btn" onclick="drawCard()">---</button>
+        <button class = 'button' id="pass-btn" onclick="pass()">---</button>
+    </div>
+    <div>
+        <button id = 'reset-button'>Reset</button>
+    </div>
+    <br>
+    <p id = 'enemy-hand'> Enemy cards:
+        <span id="enemy-first-card"></span>
+        <span id="enemy-second-card"></span>
+        <span id="enemy-third-card"></span>
+        <span id="enemy-fourth-card"></span>
+        <span id="enemy-fifth-card"></span>
+    </p>
+    <p>Sum: <span id="enemy-score"></span> </p>
+    <br>
+    <hr>
+    <ul id ='rules-container'>Easy Blackjack - Quick rules:
+        <li class="rules">Your goal is to get your card score as close to 21 as possible!</li>
+        <li class="rules">Players start with 2 cards and can draw up to 3 more cards.</li>
+        <li class="rules">There is a total of 12 cards in deck with values between 1 and 12.</li>
+        <li class="rules">Players lose if they go over the score of 21.</li>
+        <li class="rules">The round concludes when both player decide to stand</li>
+        <li class="rules">Players can't see other players cards</li>
+    </ul>
+    <div id="buttons">
+    <!-- <button id="do-it" onclick="doIt()">Do it</button> -->
+    </div>
+    <script src="Index.js"></script>
+</body>
