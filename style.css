@@ -50,6 +50,10 @@ p{
     font-weight: 800;
 }
 
+a:visited{
+    color:rgb(4, 61, 4);
+}
+
 button{
     background: rgb(92, 87, 87);
     border: 2px double rgb(177, 172, 172);
