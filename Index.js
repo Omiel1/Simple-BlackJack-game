@@ -11,7 +11,6 @@ const enemyThirdCardEl = document.getElementById('enemy-third-card');
 const enemyFourthCardEl = document.getElementById('enemy-fourth-card');
 const enemyFifthCardEl = document.getElementById('enemy-fifth-card');
 const enemyScoreEl = document.getElementById('enemy-score');
-const enemyHandEl = document.getElementById('enemy-hand');
 
 const messageContainer = document.getElementById('message-p');
 const drawBtnEl = document.querySelector('#draw-btn');
@@ -32,11 +31,10 @@ var gameIsOver = false;
 
 var message = 'Want to play a round?';
 messageContainer.textContent = message;
-
+//Change it so game resets on Start Game button
 function startGame(){
     if(gameIsOver === false)
     {
-        reset();
         console.log('The game has started!');
     
         myHand[0] = getRndInteger(1,13);
@@ -50,16 +48,15 @@ function startGame(){
         enemyHand[1] = getRndInteger(1,13);
         enemySecondCardEl.textContent = '?';
         enemySum= enemyHand[0] + enemyHand[1];
-        console.warn(`Enemy sum ${enemySum}`);
     
-        message =`Your total is: ${sum}, do you want to draw another card?`;
         drawBtnEl.textContent = 'Hit';
         passBtnEl.textContent = 'Stand';
         sumEl.textContent = sum;
-        messageContainer.textContent = message;
+        messageContainer.textContent = gameMessage(sum);
     }
     else{
-        window.location.reload;
+        reset();
+        startGame();
     }
 }
 
@@ -107,20 +104,22 @@ function drawCard(){
         else{
             console.log("You can't draw again!");
             playerPass = true;
-        }
-        if(sum < 21){
-            message =`Your total is: ${sum}, do you want to draw another card?`;
-        }
-        else if(sum === 21){
-            message = `You got a blackjack! There is no need to draw more cards!`;
-            drawBtnEl.textContent = '---';
-        }
-        else{
-            message =`You went over 21, no need to draw anymore, but no one is stopping you!`;
-        }
-        
-        messageContainer.textContent = message;
+        } 
+        messageContainer.textContent = gameMessage(sum);
         enemyRound();
+    }
+}
+
+function gameMessage(sum){
+    if(sum < 21){
+        return `Your total is: ${sum}, do you want to draw another card?`;
+    }
+    else if(sum === 21){
+        drawBtnEl.textContent = '---';
+        return `You got a blackjack! There is no need to draw more cards!`;
+    }
+    else{
+        return `You went over 21, no need to draw anymore, but no one is stopping you!`;
     }
 }
 
@@ -238,30 +237,30 @@ function revealEnemyCards(){
 
     if(gameIsOver === false)
     {
-        enemyScoreEl.textContent += " " + enemySum;
+        enemyScoreEl.textContent =  enemySum;
     }
 }
 
 function reset(){
-    enemyHand.forEach(card => {
-        card = 0;
-    });
-
-    myHand.forEach(card => {
-        card = 0;
-    })
+    myHand = [0,0,0,0,0];
+    enemyHand = [0,0,0,0,0];
     sum = 0;
     enemySum = 0;
+    playerPass = false;
+    enemyPass = false;
+    gameIsOver = false;
 
     thirdCardEl.textContent = '';
     fourthCardEl.textContent = '';
     fifthCardEl.textContent = '';
     sumEl.textContent = '';
 
-    enemyThirdCardEl.innerText = '';
-    enemyFourthCardEl.innerText = '';
-    enemyFifthCardEl.innerText = '';
-    enemyScoreEl.innerText = '';
+    enemyFirstCardEl.textContent = '';
+    enemySecondCardEl.textContent = '';
+    enemyThirdCardEl.textContent = '';
+    enemyFourthCardEl.textContent = '';
+    enemyFifthCardEl.textContent = '';
+    enemyScoreEl.textContent = '';
 }
 
 function createSpan(idName, innerText){
